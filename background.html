@@ -1,13 +1,12 @@
 <html>
     <head>
         <script>
-            var responseHandler = function(response) {
-                if (response) alert(response);
+            var excHandler = function(exc) {
+                if (exc) alert(exc.name + ": " + exc.message);
             };
             var execute = function(code) {
                 chrome.tabs.getSelected(null, function(tab) {
-                    chrome.tabs.sendRequest(tab.id, {code: code},
-                            responseHandler);
+                    chrome.tabs.sendRequest(tab.id, {code: code}, excHandler);
                 });
             };
         </script>

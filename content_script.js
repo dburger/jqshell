@@ -1,9 +1,11 @@
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
-    var response = null;
+    var exception = null;
     try {
         eval(request.code);
     } catch (exc) {
-        response = exc.message || exc.toString();
+      // there was a circular reference in jQueries exceptions that
+      // sendResponse didn't like
+      exception = {name: exc.name, message: exc.message};
     }
-    sendResponse(response);
+    sendResponse(exception);
 });
