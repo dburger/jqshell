@@ -1,10 +1,13 @@
 <html>
     <head>
         <script>
+            var responseHandler = function(response) {
+                if (response) alert(response);
+            };
             var execute = function(code) {
                 chrome.tabs.getSelected(null, function(tab) {
-                    // second parameter function to handle response not used here
-                    chrome.tabs.sendRequest(tab.id, {code: code});
+                    chrome.tabs.sendRequest(tab.id, {code: code},
+                            responseHandler);
                 });
             };
         </script>

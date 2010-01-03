@@ -1,8 +1,9 @@
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
+    var response = null;
     try {
         eval(request.code);
     } catch (exc) {
-        alert(exc.message);
+        response = exc.message || exc.toString();
     }
-    sendResponse({});
+    sendResponse(response);
 });
