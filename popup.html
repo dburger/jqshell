@@ -21,13 +21,16 @@
                 $("#close").click(function(evt) {window.close();});
                 $("#code").val(localStorage.code);
                 $("#code").focus();
+                $("#main").slideDown();
             });
         </script>
     </head>
     <body>
-        <textarea id="code" rows="20" cols="80"></textarea>
-        <button id="run">Run</button>
-        <button id="clear">Clear</button>
-        <button id="close">Close</button>
+        <div id="main" style="display:none">
+            <textarea id="code" rows="20" cols="80"></textarea>
+            <button id="run">Run</button>
+            <button id="clear">Clear</button>
+            <button id="close">Close</button>
+        </div>
     </body>
 </html>
