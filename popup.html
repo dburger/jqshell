@@ -14,7 +14,10 @@
                     if (evt.ctrlKey && (evt.keyCode === 10)) execute();
                 });
                 $("#run").click(function(evt) {execute();});
-                $("#clear").click(function(evt) {$("#code").val("")});
+                $("#clear").click(function(evt) {
+                    $("#code").val("");
+                    $("#code").focus();
+                });
                 $("#close").click(function(evt) {window.close();});
                 $("#code").val(localStorage.code);
                 $("#code").focus();
