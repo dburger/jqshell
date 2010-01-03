@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <link type="text/css" href="popup.css" rel="stylesheet"/>
+        <script src="jquery-1.3.2.min.js"></script>
+        <script>
+            $(function() {
+                var execute = function() {
+                    var code = $("#code").val();
+                    localStorage.code = code;
+                    chrome.extension.getBackgroundPage().execute(code);
+                    window.close();
+                };
+                $("#code").keypress(function(evt) {
+                    if (evt.ctrlKey && (evt.keyCode === 10)) execute();
+                });
+                $("#run").click(function(evt) {execute();});
+                $("#clear").click(function(evt) {$("#code").val("")});
+                $("#close").click(function(evt) {window.close();});
+                $("#code").val(localStorage.code);
+                $("#code").focus();
+            });
+        </script>
+    </head>
+    <body>
+        <textarea id="code" rows="20" cols="80"></textarea>
+        <button id="run">Run</button>
+        <button id="clear">Clear</button>
+        <button id="close">Close</button>
+    </body>
+</html>

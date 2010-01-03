@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <script>
+            var execute = function(code) {
+                chrome.tabs.getSelected(null, function(tab) {
+                    // second parameter function to handle response not used here
+                    chrome.tabs.sendRequest(tab.id, {code: code});
+                });
+            };
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
