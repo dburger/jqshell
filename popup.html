@@ -4,10 +4,31 @@
         <script src="jquery-1.4.min.js"></script>
         <script>
             $(function() {
+                var callback = function(exc) {
+                    if (exc) {
+                        var html = $("html");
+                        var position = html.position();
+                        var centerX = html.width() / 2;
+                        var centerY = html.height() / 2;
+                        var excDiv = $("<div>")
+                            .css({position: "absolute", left: centerX, top: centerY})
+                            .css({width: 10, height: 10})
+                            .css({background: "red"})
+                            .html(exc.name + ": " + exc.message)
+                            .appendTo(html);
+                        excDiv.animate({left: 0, top: 0, width: html.width(),
+                            height: html.height()})
+                        excDiv.click(function(evt) {
+                            var self = $(this);
+                            self.animate({left: centerX, top: centerY, width: 0, height: 0},
+                                function() {self.remove();});
+                        });
+                    }
+                };
                 var execute = function() {
                     var code = $("#code").val();
                     localStorage.code = code;
-                    chrome.extension.getBackgroundPage().execute(code);
+                    chrome.extension.getBackgroundPage().execute(code, callback);
                 };
                 $("#code").keypress(function(evt) {
                     if (evt.ctrlKey && (evt.keyCode === 10)) execute();

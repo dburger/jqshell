@@ -1,9 +1,6 @@
 <html>
     <head>
         <script>
-            var exceptionHandler = function(exc) {
-                if (exc) alert(exc.name + ": " + exc.message);
-            };
             var sendToSelectedTab = function(data, responseHandler) {
                 chrome.tabs.getSelected(null, function(tab) {
                     // could have just executed directly with something like
@@ -16,8 +13,8 @@
                     chrome.tabs.sendRequest(tab.id, data, responseHandler)
                 });
             };
-            var execute = function(code) {
-                sendToSelectedTab({code: code}, exceptionHandler);
+            var execute = function(code, callback) {
+                sendToSelectedTab({code: code}, callback);
             };
             var reload = function() {
                 sendToSelectedTab({reload: true});

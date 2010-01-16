@@ -1,8 +1,8 @@
-var reload = function(responseHandler) {
+var reload = function(callback) {
     window.location.href = window.location.href;
-    responseHandler(null);
+    callback(null);
 };
-var execute = function(code, responseHandler) {
+var execute = function(code, callback) {
     var exception = null;
     try {
         eval(code);
@@ -11,17 +11,17 @@ var execute = function(code, responseHandler) {
       // sendResponse didn't like
       exception = {name: exc.name, message: exc.message};
     }
-    responseHandler(exception);
+    callback(exception);
 };
 
 chrome.extension.onRequest.addListener(
-        function(data, sender, responseHandler) {
+        function(data, sender, callback) {
     if (data.reload) {
-        reload(responseHandler);
+        reload(callback);
     } else if (data.code) {
-        execute(data.code, responseHandler);
+        execute(data.code, callback);
     } else {
-        responseHandler({name: "InvalidArgumentException",
-                message: "Argument to content script not understood."});
+        callback({name: "InvalidArgumentException",
+            message: "Argument to content script not understood."});
     }
 });
