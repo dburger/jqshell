@@ -12,6 +12,6 @@ html {
   font-weight: bold;
 }
 
-button {
+button.sized {
   width: 80px;
 }
