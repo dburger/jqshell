@@ -8,21 +8,27 @@
                     if (exc) {
                         var html = $("html");
                         var position = html.position();
-                        var centerX = html.width() / 2;
-                        var centerY = html.height() / 2;
+                        // var centerX = html.width() / 2;
+                        // var centerY = html.height() / 2;
                         var excDiv = $("<div>")
-                            .css({position: "absolute", left: centerX, top: centerY})
-                            .css({width: 10, height: 10})
-                            .css({background: "red"})
-                            .html(exc.name + ": " + exc.message)
+                            .css({position: "absolute", left: 0, top: 0})
+                            .css({width: html.width() -2, height: 0})
+                            .css({background: "red", border: "1px solid black"})
                             .appendTo(html);
-                        excDiv.animate({left: 0, top: 0, width: html.width(),
-                            height: html.height()})
-                        excDiv.click(function(evt) {
-                            var self = $(this);
-                            self.animate({left: centerX, top: centerY, width: 0, height: 0},
-                                function() {self.remove();});
-                        });
+                        var closeDiv = $("<div>")
+                            .addClass("text")
+                            .css({background: "black", color: "yellow", cursor: "pointer"})
+                            .css({padding: "5px"})
+                            .html("<< Hmmmmm, that didn't work.  Click here to close. >>")
+                            .click(function(evt) {
+                                excDiv.animate({height: 0}, function() {excDiv.remove();});
+                            });
+                        var msgDiv = $("<div>")
+                            .addClass("text")
+                            .css({padding: "5px"})
+                            .html(exc.name + ": " + exc.message);
+                        excDiv.append(closeDiv).append(msgDiv);
+                        excDiv.animate({height: html.height() - 2})
                     }
                 };
                 var execute = function() {
@@ -50,7 +56,7 @@
     </head>
     <body>
         <div id="main" style="display:none">
-            <textarea id="code" rows="10" cols="80"></textarea>
+            <textarea id="code" rows="10" cols="80" class="text"></textarea>
             <button id="run">Run</button>
             <button id="reload">Reload</button>
             <button id="clear">Clear</button>

@@ -5,6 +5,9 @@ html {
 #code {
   background: black;
   color: #00FF00;
+}
+
+.text {
   font-family: monospace;
   font-weight: bold;
 }
