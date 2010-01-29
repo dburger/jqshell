@@ -14,7 +14,7 @@ $(function() {
 
     var history = function(i) {
         var history = localStorage.getObject("history");
-        // overwrite Array's push method to maintain the history
+        // overwrite Array's push method to maintain the history in localStorage
         history.push = function(code) {
             if (history.length === 0
                     || code !== history[history.length - 1]) {
