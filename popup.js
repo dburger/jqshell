@@ -14,7 +14,7 @@ $(function() {
 
     var history = function(i) {
         var history = localStorage.getObject("history");
-        // overwrite Array's push method to maintain the history in localStorage
+        // overwrite Array's push method to maintain history in localStorage
         history.push = function(code) {
             if (history.length === 0
                     || code !== history[history.length - 1]) {
@@ -30,27 +30,51 @@ $(function() {
 
     var historyIdx = history().length - 1;
 
+    var excDivProps = function(html) {
+      return {
+        css: {
+          position: "absolute",
+          left: 0, top: 0,
+          width: html.width() - 2, height: 0,
+          background: "red",
+          border: "1px solid black"
+        }
+      };
+    };
+
+    var closeDivProps = function(excDiv) {
+      return {
+        "class": "text",
+        css: {
+          background: "black",
+          color: "yellow",
+          cursor: "pointer",
+          padding: "5px"
+        },
+        html: "<< Hmmmmm, that didn't work.  Click here to close. >>",
+        click: function(evt) {
+          excDiv.animate({height: 0}, function() {excDiv.remove();});
+        }
+      };
+    };
+
+    var msgDivProps = function(exc) {
+      return {
+        "class": "text",
+        css: {
+          padding: "5px"
+        },
+        html: exc.name + ": " + exc.message
+      };
+    };
+
     var callback = function(exc) {
         if (exc) {
             var html = $("html");
             var position = html.position();
-            var excDiv = $("<div>")
-                .css({position: "absolute", left: 0, top: 0})
-                .css({width: html.width() - 2, height: 0})
-                .css({background: "red", border: "1px solid black"})
-                .appendTo(html);
-            var closeDiv = $("<div>")
-                .addClass("text")
-                .css({background: "black", color: "yellow", cursor: "pointer"})
-                .css({padding: "5px"})
-                .html("<< Hmmmmm, that didn't work.  Click here to close. >>")
-                .click(function(evt) {
-                    excDiv.animate({height: 0}, function() {excDiv.remove();});
-                });
-            var msgDiv = $("<div>")
-                .addClass("text")
-                .css({padding: "5px"})
-                .html(exc.name + ": " + exc.message);
+            var excDiv = $("<div>", excDivProps(html)).appendTo(html);
+            var closeDiv = $("<div>", closeDivProps(excDiv));
+            var msgDiv = $("<div>", msgDivProps(exc));
             excDiv.append(closeDiv).append(msgDiv);
             excDiv.animate({height: html.height() - 2})
         }
