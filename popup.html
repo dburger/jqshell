@@ -1,18 +1,18 @@
 <html>
     <head>
         <link type="text/css" href="popup.css" rel="stylesheet"/>
-        <script src="jquery-1.4.1.min.js"></script>
+        <script src="jquery-1.4.2.min.js"></script>
         <script src="popup.js"></script>
     </head>
     <body>
         <div id="main" style="display:none">
             <textarea id="code" rows="10" cols="80" class="text"></textarea>
-            <button class="sized" id="run">Run</button>
-            <button class="sized" id="reload">Reload</button>
-            <button class="sized" id="clear">Clear</button>
-            <button class="sized" id="close">Close</button>
-            <button id="prev"><<</button>
-            <button id="next">>></button>
+            <button class="sized" id="run" title="run the script">Run</button>
+            <button class="sized" id="reload" title="reload the web page">Reload</button>
+            <button class="sized" id="clear" title="clear the script">Clear</button>
+            <button class="sized" id="close" title="close jQuery Shell">Close</button>
+            <button id="prev" title="previous in script history"><<</button>
+            <button id="next" title="next in script history">>></button>
         </div>
     </body>
 </html>
