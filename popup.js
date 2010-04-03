@@ -71,7 +71,6 @@ $(function() {
     var callback = function(exc) {
         if (exc) {
             var html = $("html");
-            var position = html.position();
             var excDiv = $("<div>", excDivProps(html)).appendTo(html);
             var closeDiv = $("<div>", closeDivProps(excDiv));
             var msgDiv = $("<div>", msgDivProps(exc));
