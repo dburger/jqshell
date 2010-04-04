@@ -32,6 +32,7 @@ $(function() {
 
     var excDivProps = function(html) {
       return {
+        "class": "text",
         css: {
           position: "absolute",
           left: 0, top: 0,
@@ -44,7 +45,6 @@ $(function() {
 
     var closeDivProps = function(excDiv) {
       return {
-        "class": "text",
         css: {
           background: "black",
           color: "yellow",
@@ -60,7 +60,6 @@ $(function() {
 
     var msgDivProps = function(exc) {
       return {
-        "class": "text",
         css: {
           padding: "5px"
         },
