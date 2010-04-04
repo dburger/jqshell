@@ -32,25 +32,16 @@ $(function() {
 
     var excDivProps = function(html) {
       return {
-        "class": "text",
+        "class": "text exc-div",
         css: {
-          position: "absolute",
-          left: 0, top: 0,
           width: html.width() - 2, height: 0,
-          background: "red",
-          border: "1px solid black"
         }
       };
     };
 
     var closeDivProps = function(excDiv) {
       return {
-        css: {
-          background: "black",
-          color: "yellow",
-          cursor: "pointer",
-          padding: "5px"
-        },
+        "class": "close-div",
         html: "<< Hmmmmm, that didn't work.  Click here to close. >>",
         click: function(evt) {
           excDiv.animate({height: 0}, function() {excDiv.remove();});
@@ -60,9 +51,7 @@ $(function() {
 
     var msgDivProps = function(exc) {
       return {
-        css: {
-          padding: "5px"
-        },
+        "class": "msg-div",
         html: exc.name + ": " + exc.message
       };
     };

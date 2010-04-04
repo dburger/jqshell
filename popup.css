@@ -15,3 +15,22 @@ html {
 button.sized {
   width: 80px;
 }
+
+.exc-div {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: red;
+  border: 1px solid black;
+}
+
+.close-div {
+  background: black;
+  color: yellow;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.msg-div {
+  padding: 5px;
+}
