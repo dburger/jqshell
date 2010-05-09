@@ -6,7 +6,10 @@ $(function() {
         this.setItem(key, JSON.stringify(value));
     };
     Storage.prototype.getObject = function(key) {
-        return JSON.parse(this.getItem(key));
+        // some releases of chrome appear to have trouble with JSON.parse
+        // on a null object - gives "Illegal Access" error
+        var object = this.getItem(key);
+        return object ? JSON.parse(object) : null;
     };
     if (!localStorage.getObject("history")) {
         localStorage.setObject("history", []);
